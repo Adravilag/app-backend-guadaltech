@@ -1,13 +1,15 @@
 const { Router } = require("express");
 
+const { getPersonas, newPersona, updatePersona, deletePersona } = require('../controllers/personas');
+
 const router = Router();
 
-router.get('/', () => console.log('Get Personas'));
+router.get('/', getPersonas);
 
-router.post('/', () => console.log('Post Personas'));
+router.post('/', newPersona);
 
-router.put('/:id', () => console.log('Put Persona'));
+router.put('/:id', updatePersona);
 
-router.delete('/:id', () => console.log('Delete Persona'));
+router.delete('/:id', deletePersona);
 
 module.exports = router;

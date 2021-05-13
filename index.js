@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Base de datos
-// dbConnection();
+dbConnection();
 
 // Rutas
 app.use('/api/personas', require('./routes/personas'));
