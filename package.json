@@ -1,0 +1,14 @@
+{
+  "name": "guadaltech",
+  "version": "1.0.0",
+  "description": "proyecto para contemplar la candidatura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrián Dávila Guerra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
