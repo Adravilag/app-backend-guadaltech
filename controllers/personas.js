@@ -7,11 +7,17 @@ const getPersonas = async(req, res = response) => {
     const desde = Number(req.query.desde) || 0;
 
     try {
-        const personas = await Persona.find({}, 'nombre apellidos email role img').skip(desde).limit(5);
+
+        const [personas, total] = await Promise.all([
+            Persona.find({}, 'nombre apellidos email puesto horario salario').skip(desde).limit(10),
+            Persona.countDocuments()
+        ]);
+
 
         res.json({
             ok: true,
-            personas
+            personas,
+            total
         });
 
 
@@ -23,6 +29,35 @@ const getPersonas = async(req, res = response) => {
             ok: false,
             status,
             msg: 'Error inesperado'
+        });
+    }
+
+}
+
+const getPersonaById = async(req, res = response) => {
+
+    const id = req.params.id;
+
+    try {
+
+        const persona = await Persona.findById(id, 'nombre apellidos email puesto horario salario');
+        if (!persona) {
+            res.status(404).json({
+                ok: false,
+                msg: "No se ha encontrado la persona por id"
+            });
+        }
+
+        res.json({
+            ok: true,
+            persona
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            ok: false,
+            msg: "Hable con el administrador"
         });
     }
 
@@ -124,4 +159,4 @@ const deletePersona = async(req, res) => {
 
 }
 
-module.exports = { getPersonas, createPersona, updatePersona, deletePersona }
+module.exports = { getPersonas, getPersonaById, createPersona, updatePersona, deletePersona }

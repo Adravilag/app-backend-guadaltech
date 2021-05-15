@@ -4,9 +4,9 @@ const PersonaSchema = Schema({
     nombre: { type: String, required: true },
     apellidos: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, required: true, default: 'USER_ROLE' },
-    img: { type: String },
+    puesto: { type: String, required: true },
+    horario: { type: String, required: true },
+    salario: { type: Number, required: true },
 });
 
 PersonaSchema.method('toJSON', function() {
