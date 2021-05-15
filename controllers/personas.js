@@ -2,11 +2,12 @@ const { response } = require('express');
 
 const Persona = require('../models/persona');
 
-const getPersonas = async(req, res) => {
+const getPersonas = async(req, res = response) => {
+
+    const desde = Number(req.query.desde) || 0;
 
     try {
-
-        const personas = await Persona.find({}, 'nombre email role img');
+        const personas = await Persona.find({}, 'nombre apellidos email role img').skip(desde).limit(5);
 
         res.json({
             ok: true,
@@ -27,7 +28,7 @@ const getPersonas = async(req, res) => {
 
 }
 
-const newPersona = async(req, res) => {
+const createPersona = async(req, res) => {
 
     try {
 
@@ -123,4 +124,4 @@ const deletePersona = async(req, res) => {
 
 }
 
-module.exports = { getPersonas, newPersona, updatePersona, deletePersona }
+module.exports = { getPersonas, createPersona, updatePersona, deletePersona }

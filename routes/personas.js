@@ -1,12 +1,12 @@
 const { Router } = require("express");
 
-const { getPersonas, newPersona, updatePersona, deletePersona } = require('../controllers/personas');
+const { getPersonas, createPersona, updatePersona, deletePersona } = require('../controllers/personas');
 
 const router = Router();
 
 router.get('/', getPersonas);
 
-router.post('/', newPersona);
+router.post('/', createPersona);
 
 router.put('/:id', updatePersona);
 
