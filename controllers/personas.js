@@ -5,14 +5,13 @@ const Persona = require('../models/persona');
 const getPersonas = async(req, res = response) => {
 
     const desde = Number(req.query.desde) || 0;
-
+    const limit = Number(req.query.limit) || 0;
     try {
 
         const [personas, total] = await Promise.all([
-            Persona.find({}, 'nombre apellidos email puesto horario salario').skip(desde).limit(10),
+            Persona.find({}, 'nombre apellidos email puesto horario salario').skip(desde).limit(limit),
             Persona.countDocuments()
         ]);
-
 
         res.json({
             ok: true,
@@ -28,7 +27,7 @@ const getPersonas = async(req, res = response) => {
         res.status(500).json({
             ok: false,
             status,
-            msg: 'Error inesperado'
+            msg: 'Error, no se ha podido mostrar las Personas'
         });
     }
 
@@ -44,7 +43,7 @@ const getPersonaById = async(req, res = response) => {
         if (!persona) {
             res.status(404).json({
                 ok: false,
-                msg: "No se ha encontrado la persona por id"
+                msg: "No existe la persona con ese identificador"
             });
         }
 
@@ -81,7 +80,7 @@ const createPersona = async(req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error inesperado... revisar logs'
+            msg: 'Error, no se ha podido crear Persona'
         });
 
     }
@@ -100,13 +99,11 @@ const updatePersona = async(req, res) => {
         if (!personaDB) {
             return res.status(404).json({
                 ok: false,
-                msg: "No existe una persona con ese id"
+                msg: "No existe la persona con ese identificador"
             })
         }
 
         const personaActualizada = await Persona.findByIdAndUpdate(id, campos, { new: true });
-
-        console.log(personaActualizada);
 
         res.json({
             ok: true,
@@ -121,7 +118,7 @@ const updatePersona = async(req, res) => {
         res.status(500).json({
             ok: false,
             status,
-            msg: 'Error inesperado'
+            msg: 'Error, no se ha podido actualizar Persona'
         });
     }
 
@@ -138,7 +135,7 @@ const deletePersona = async(req, res) => {
         if (!persona) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe una persona con ese ID'
+                msg: "No existe la persona con ese identificador"
             });
         }
 
@@ -152,7 +149,7 @@ const deletePersona = async(req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error al eliminar'
+            msg: 'Error al eliminar Persona'
         });
 
     }
