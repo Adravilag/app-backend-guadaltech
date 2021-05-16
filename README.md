@@ -8,7 +8,7 @@ Ejecuta `nodemon index.js` para el servicio de desarrollo. Navega a http://local
 Podrás ver con todo detalle cómo se debe lanzar las peticiones para este servicio a partir de [Postman](https://documenter.getpostman.com/view/4029976/TzRX85G7).
 
 ## Propuesta
-Sería crear una aplicación sencilla con el framework de express en Node.js, en el cual se utilizará el patrón de Modelo, Vista y Controllador, en el cual utilizaremos la entidad Persona para lanzar peticiones a traves de dicha entidad. Dichas peticiones serán: GET, Get por ID, PUT, POST y DELETE. Además de tener controlado en caso de que la peticiones no se están enviando correctamente.
+Sería crear una aplicación sencilla con el framework de express en Node.js, en el cual se utilizará el patrón de Modelo, Vista y Controllador, por lo que utilizaremos la entidad Persona para lanzar peticiones a traves de dicha entidad. Dichas peticiones serán: GET, Get por ID, PUT, POST y DELETE. Además de tener controlado en caso de que la peticiones no se están enviando correctamente.
 
 ## Modelos de datos
 El modelo de **Persona**, cuyos datos será almacenado en una base de datos no relacional de MongoDB en Atlas, consta con los siguientes atributos:
