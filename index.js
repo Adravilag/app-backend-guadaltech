@@ -21,6 +21,4 @@ dbConnection();
 // Rutas
 app.use('/api/personas', require('./routes/personas'));
 
-app.get('/', (req, res) => res.send('Hello World!'))
-
 app.listen(process.env.PORT, () => console.log(`Servidor funcionando en puerto ${process.env.PORT}`))
