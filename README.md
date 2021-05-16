@@ -2,7 +2,7 @@
 Este proyecto fue generado con la versión v14.6.1 de Node.JS
 
 # Development server
-Ejecuta nodemon index.js para el servicio de desarrollo. Navega a http://localhost:3000/api/personas para obtener el listado de todas las personas disponibles. La aplicación se recargará automáticamente si cambias alguno de los archivos de origen. Para ejecutar el proyecto en producción navegue a https://guadaltech-app-prueba.herokuapp.com/api/personas.
+Ejecuta `nodemon index.js` para el servicio de desarrollo. Navega a http://localhost:3000/api/personas para obtener el listado de todas las personas disponibles. La aplicación se recargará automáticamente si cambias alguno de los archivos de origen. Para ejecutar el proyecto en producción navegue a https://guadaltech-app-prueba.herokuapp.com/api/personas.
 
 # Documentación del API REST
 Podrás ver con todo detalle cómo se debe lanzar las peticiones para este servicio a partir de [Postman](https://documenter.getpostman.com/view/4029976/TzRX85G7).
