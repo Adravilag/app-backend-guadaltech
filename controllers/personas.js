@@ -73,8 +73,6 @@ const createPersona = async(req, res) => {
 
         const { salario, horario, puesto } = persona;
 
-        console.log(salario);
-
         if (!compareHorario(horario)) {
             msg = 'El horario no es correcto. El horario debe ser: Jornada completa, Tiempo parcial 1 o Tiempo parcial 2';
             throw new Error;
@@ -109,15 +107,30 @@ const updatePersona = async(req, res) => {
 
     const id = req.params.id;
     const campos = req.body;
+    const { salario, horario, puesto } = campos;
+
+    let msg = 'Error, no se ha podido actualizar Persona'
 
     try {
 
         const personaDB = await Persona.findById(id);
 
+        if (!compareHorario(horario)) {
+            msg = 'El horario no es correcto. El horario debe ser: Jornada completa, Tiempo parcial 1 o Tiempo parcial 2.';
+            throw new Error;
+        } else if (!comparePuesto(puesto)) {
+            msg = 'El puesto no es correcto. El puesto deber ser: Administrativ@, Diseñador/a, Desarrollador/a, Front-End Developer, Back-End Developer o Full-Stack Developer.';
+            throw new Error;
+        } else if (!compareSalario(Number(salario))) {
+            msg = 'El salario no es correcto. El sueldo debe ser: 13000, 15000, 18000, 20000, 22000, 23000 o 25000.';
+            throw new Error;
+        }
+
+
         if (!personaDB) {
             return res.status(404).json({
                 ok: false,
-                msg: "No existe la persona con ese identificador"
+                msg: 'No se ha encontrado la Persona con ese identificador'
             })
         }
 
@@ -135,8 +148,7 @@ const updatePersona = async(req, res) => {
 
         res.status(500).json({
             ok: false,
-            status,
-            msg: 'Error, no se ha podido actualizar Persona'
+            msg
         });
     }
 

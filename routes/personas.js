@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const { check } = require('express-validator');
 
+const { validarCampos } = require('../middlewares/validar-campos');
+
 const { getPersonas, createPersona, updatePersona, deletePersona, getPersonaById } = require('../controllers/personas');
 
 const router = Router();
@@ -16,6 +18,7 @@ router.post('/', [
     check('salario', 'El salario es obligatorios').not().isEmpty(),
     check('horario', 'El horario es obligatorio').not().isEmpty(),
     check('email', 'El email es obligatorio').isEmail(),
+    validarCampos
 ], createPersona);
 
 router.put('/:id', [
@@ -25,6 +28,7 @@ router.put('/:id', [
     check('salario', 'El salario es obligatorios').not().isEmpty(),
     check('horario', 'El horario es obligatorio').not().isEmpty(),
     check('email', 'El email es obligatorio').isEmail(),
+    validarCampos
 ], updatePersona);
 
 router.delete('/:id', deletePersona);

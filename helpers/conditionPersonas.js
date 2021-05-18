@@ -1,4 +1,5 @@
 const compareSalario = (salario) => {
+
     return salario === 13000 ||
         salario === 15000 ||
         salario === 18000 ||
