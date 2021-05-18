@@ -1,4 +1,5 @@
 const { response } = require('express');
+const { compareHorario, comparePuesto, compareSalario } = require('../helpers/conditionPersonas');
 
 const Persona = require('../models/persona');
 
@@ -64,9 +65,26 @@ const getPersonaById = async(req, res = response) => {
 
 const createPersona = async(req, res) => {
 
+    let msg = 'Error, no se ha podido crear Persona';
+
     try {
 
         const persona = new Persona(req.body);
+
+        const { salario, horario, puesto } = persona;
+
+        console.log(salario);
+
+        if (!compareHorario(horario)) {
+            msg = 'El horario no es correcto. El horario debe ser: Jornada completa, Tiempo parcial 1 o Tiempo parcial 2';
+            throw new Error;
+        } else if (!comparePuesto(puesto)) {
+            msg = 'El puesto no es correcto. El puesto deber ser: Administrativ@, Diseñador/a, Desarrollador/a, Front-End Developer, Back-End Developer o Full-Stack Developer';
+            throw new Error;
+        } else if (!compareSalario(salario)) {
+            msg = 'El salario no es correcto. El sueldo debe ser: 13000, 15000, 18000, 20000, 22000, 23000 o 25000';
+            throw new Error;
+        }
 
         await persona.save();
 
@@ -80,7 +98,7 @@ const createPersona = async(req, res) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error, no se ha podido crear Persona'
+            msg
         });
 
     }
